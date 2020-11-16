@@ -8,9 +8,10 @@ import RouterExplorer from './explorer';
 async function scan(app: Koa, ControllerDir: string): Promise<void> {
   const Controllers = await fsp.readdir(ControllerDir);
   for (const Controller of Controllers) {
-    const { default: ctor } = await import(
-      path.resolve(ControllerDir, Controller)
-    );
+    const { default: ctor } = await require(path.resolve(
+      ControllerDir,
+      Controller
+    ));
     const basePath = Reflect.getMetadata(PATH_METADATA, ctor);
     if (basePath) {
       new RouterExplorer(basePath, app).explore(new ctor());

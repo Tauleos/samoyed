@@ -1,6 +1,6 @@
 import Koa from 'koa';
 
-import { scan } from '../build';
+import { scan } from '../build/cmjs';
 import path from 'path';
 const app = new Koa();
 // 初始化

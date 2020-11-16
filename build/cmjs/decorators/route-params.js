@@ -17,7 +17,6 @@ var enum_1 = require("../enum");
 function createRouteParamDecorator(paramType) {
     return function (data) { return function (target, key, index) {
         var _a;
-        console.log(target, key, index);
         var args = Reflect.getMetadata(constants_1.ROUTE_ARGS_METADATA, target.constructor, key) || {};
         Reflect.defineMetadata(constants_1.ROUTE_ARGS_METADATA, __assign(__assign({}, args), (_a = {}, _a[paramType + ":" + index] = { index: index, data: data }, _a)), target.constructor, key);
     }; };

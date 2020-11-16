@@ -1,4 +1,4 @@
-import { Controller, Ctx, Get, Ip, Post, Req } from '../../build';
+import { Controller, Ctx, Get, Ip, Post, Req } from '../../build/cmjs';
 import { Context, Request } from 'koa';
 
 @Controller('/goods')

@@ -103,7 +103,6 @@ var RouterExplorer = /** @class */ (function () {
         //todo get paramDecorator
         var metadata = Reflect.getMetadata(constants_1.ROUTE_ARGS_METADATA, instance.constructor, methodName) || {};
         var types = Reflect.getMetadata('design:paramtypes', instance, methodName);
-        console.log('metadata', metadata);
         var keys = Object.keys(metadata);
         var args = new Array(keys.length);
         var paramsOptions = keys.map(function (key) {
