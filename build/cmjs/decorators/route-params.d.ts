@@ -12,3 +12,4 @@ export declare const File: (data?: string | number | Record<string, unknown> | u
 export declare const Files: (data?: string | number | Record<string, unknown> | undefined) => ParameterDecorator;
 export declare const Ip: (data?: string | number | Record<string, unknown> | undefined) => ParameterDecorator;
 export declare const Req: (data?: string | number | Record<string, unknown> | undefined) => ParameterDecorator;
+export declare const Res: (data?: string | number | Record<string, unknown> | undefined) => ParameterDecorator;

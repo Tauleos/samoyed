@@ -28,3 +28,4 @@ export const File = createRouteParamDecorator(RouteParamTypes.FILE);
 export const Files = createRouteParamDecorator(RouteParamTypes.FILES);
 export const Ip = createRouteParamDecorator(RouteParamTypes.IP);
 export const Req = Request;
+export const Res = Response;

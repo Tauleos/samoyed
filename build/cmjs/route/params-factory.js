@@ -1,11 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var enum_1 = require("../enum");
-var RouteParamsFactory = /** @class */ (function () {
-    function RouteParamsFactory() {
-    }
-    RouteParamsFactory.prototype.exchangeKeyForValue = function (key, data, _a) {
-        var ctx = _a.ctx, next = _a.next;
+const enum_1 = require("../enum");
+class RouteParamsFactory {
+    exchangeKeyForValue(key, data, { ctx, next }) {
         switch (key) {
             case enum_1.RouteParamTypes.NEXT:
                 return next;
@@ -34,7 +31,6 @@ var RouteParamsFactory = /** @class */ (function () {
             default:
                 return null;
         }
-    };
-    return RouteParamsFactory;
-}());
+    }
+}
 exports.default = RouteParamsFactory;
