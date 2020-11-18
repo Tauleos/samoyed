@@ -14,6 +14,8 @@
 npm install --save isamoyed
 ```
 ### 使用
+
+#### 非前缀模式(后期考虑干掉)
 ```js
 import Koa from 'koa';
 
@@ -25,6 +27,22 @@ const ControllerDir = path.resolve(__dirname, './controller');
 
 await scan(app,controllerDir);
 
+```
+#### 前缀模式
+
+```js
+import Koa from 'koa';
+
+import Samoyed from '../src';
+import path from 'path';
+const app = new Koa();
+// 初始化
+const ControllerDir = path.resolve(__dirname, './controller');
+const sam = new Samoyed(app, ControllerDir, '/api');
+
+sam.scan().then(() => {
+  app.listen(3000);
+});
 ```
 
 ### 装饰器使用示例

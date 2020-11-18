@@ -4,10 +4,10 @@ import {
   ROUTE_ARGS_METADATA,
 } from '../constants';
 import { isConstructor, isFunction } from '../utils/type';
-import Router from 'koa-router';
-import Koa, { Context, Next } from 'koa';
+import Koa, { Context, DefaultContext, DefaultState, Next } from 'koa';
 import RouteParamsFactory from './params-factory';
 import { RouteParamTypes } from '../enum';
+import Router from 'koa-router';
 
 interface PathProperty {
   routePath: string;
@@ -22,11 +22,16 @@ interface ParamProperties {
   extractValue: (ctx: Context, next: Next) => any;
 }
 export default class RouterExplorer {
-  public router = new Router();
   private paramsFactory = new RouteParamsFactory();
   private readonly basePath: string;
-  private app: Koa;
-  constructor(basePath: string, app: Koa) {
+  private app: Koa<DefaultState, DefaultContext>;
+  private readonly router: Router;
+  constructor(
+    router: Router,
+    basePath: string,
+    app: Koa<DefaultState, DefaultContext>
+  ) {
+    this.router = router;
     this.basePath = basePath;
     this.app = app;
   }
@@ -68,6 +73,7 @@ export default class RouterExplorer {
       // });
     });
     this.app.use(this.router.routes());
+    this.app.use(this.router.allowedMethods());
   }
   applyCallbackToRouter(
     pathProperty: PathProperty,

@@ -14,12 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const constants_1 = require("../constants");
 const type_1 = require("../utils/type");
-const koa_router_1 = __importDefault(require("koa-router"));
 const params_factory_1 = __importDefault(require("./params-factory"));
 class RouterExplorer {
-    constructor(basePath, app) {
-        this.router = new koa_router_1.default();
+    constructor(router, basePath, app) {
         this.paramsFactory = new params_factory_1.default();
+        this.router = router;
         this.basePath = basePath;
         this.app = app;
     }
@@ -55,6 +54,7 @@ class RouterExplorer {
             // });
         });
         this.app.use(this.router.routes());
+        this.app.use(this.router.allowedMethods());
     }
     applyCallbackToRouter(pathProperty, instance) {
         const { routePath, method, methodName, fn } = pathProperty;

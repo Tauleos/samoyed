@@ -1,5 +1,5 @@
+import Koa, { DefaultContext, DefaultState } from 'koa';
 import Router from 'koa-router';
-import Koa from 'koa';
 interface PathProperty {
     routePath: string;
     method: 'get' | 'post';
@@ -7,11 +7,11 @@ interface PathProperty {
     methodName: string;
 }
 export default class RouterExplorer {
-    router: Router<any, {}>;
     private paramsFactory;
     private readonly basePath;
     private app;
-    constructor(basePath: string, app: Koa);
+    private readonly router;
+    constructor(router: Router, basePath: string, app: Koa<DefaultState, DefaultContext>);
     explore(instance: Record<string, unknown>): void;
     scanForPaths(instance: Record<string, unknown>): {
         routePath: any;

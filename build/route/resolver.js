@@ -13,18 +13,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.scan = void 0;
+const koa_router_1 = __importDefault(require("koa-router"));
 const fs_1 = require("fs");
 const path_1 = __importDefault(require("path"));
 const constants_1 = require("../constants");
 const explorer_1 = __importDefault(require("./explorer"));
-function scan(app, ControllerDir) {
+function scan(app, ControllerDir, router) {
     return __awaiter(this, void 0, void 0, function* () {
+        router = router || new koa_router_1.default();
         const Controllers = yield fs_1.promises.readdir(ControllerDir);
         for (const Controller of Controllers) {
             const { default: ctor } = yield require(path_1.default.resolve(ControllerDir, Controller));
             const basePath = Reflect.getMetadata(constants_1.PATH_METADATA, ctor);
             if (basePath) {
-                new explorer_1.default(basePath, app).explore(new ctor());
+                new explorer_1.default(router, basePath, app).explore(new ctor());
             }
         }
     });
