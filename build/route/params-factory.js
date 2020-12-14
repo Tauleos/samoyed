@@ -11,7 +11,9 @@ class RouteParamsFactory {
             case enum_1.RouteParamTypes.RESPONSE:
                 return ctx.res;
             case enum_1.RouteParamTypes.BODY:
-                return data && ctx.body ? ctx.body[data] : ctx.body;
+                return data && ctx.request.body
+                    ? ctx.request.body[data]
+                    : ctx.request.body;
             case enum_1.RouteParamTypes.PARAM:
                 return data ? ctx.params[data] : ctx.params;
             case enum_1.RouteParamTypes.HOST:
@@ -23,9 +25,9 @@ class RouteParamsFactory {
             case enum_1.RouteParamTypes.SESSION:
                 return ctx.session;
             case enum_1.RouteParamTypes.FILE:
-                return ctx[data || 'file'];
+                return ctx.request.files ? [data || 'file'] : undefined;
             case enum_1.RouteParamTypes.FILES:
-                return ctx.files;
+                return ctx.request.files;
             case enum_1.RouteParamTypes.IP:
                 return ctx.ip;
             default:

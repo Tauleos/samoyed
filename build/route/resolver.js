@@ -18,9 +18,11 @@ const fs_1 = require("fs");
 const path_1 = __importDefault(require("path"));
 const constants_1 = require("../constants");
 const explorer_1 = __importDefault(require("./explorer"));
+const koa_body_1 = __importDefault(require("koa-body"));
 function scan(app, ControllerDir, router) {
     return __awaiter(this, void 0, void 0, function* () {
         router = router || new koa_router_1.default();
+        app.use(koa_body_1.default());
         const Controllers = yield fs_1.promises.readdir(ControllerDir);
         for (const Controller of Controllers) {
             const { default: ctor } = yield require(path_1.default.resolve(ControllerDir, Controller));

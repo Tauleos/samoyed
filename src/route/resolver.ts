@@ -4,6 +4,7 @@ import { promises as fsp } from 'fs';
 import path from 'path';
 import { PATH_METADATA } from '../constants';
 import RouterExplorer from './explorer';
+import koaBody from 'koa-body';
 
 async function scan(
   app: Koa,
@@ -11,6 +12,7 @@ async function scan(
   router?: Router
 ): Promise<void> {
   router = router || new Router();
+  app.use(koaBody());
   const Controllers = await fsp.readdir(ControllerDir);
   for (const Controller of Controllers) {
     const { default: ctor } = await require(path.resolve(

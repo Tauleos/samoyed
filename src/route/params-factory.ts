@@ -15,7 +15,9 @@ export default class RouteParamsFactory {
       case RouteParamTypes.RESPONSE:
         return ctx.res as any;
       case RouteParamTypes.BODY:
-        return data && ctx.body ? ctx.body[data] : ctx.body;
+        return data && ctx.request.body
+          ? ctx.request.body[data]
+          : ctx.request.body;
       case RouteParamTypes.PARAM:
         return data ? ctx.params[data] : ctx.params;
       case RouteParamTypes.HOST:
@@ -27,9 +29,9 @@ export default class RouteParamsFactory {
       case RouteParamTypes.SESSION:
         return ctx.session;
       case RouteParamTypes.FILE:
-        return ctx[data || 'file'];
+        return ctx.request.files ? [data || 'file'] : undefined;
       case RouteParamTypes.FILES:
-        return ctx.files;
+        return ctx.request.files;
       case RouteParamTypes.IP:
         return ctx.ip;
       default:
