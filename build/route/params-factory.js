@@ -6,6 +6,8 @@ class RouteParamsFactory {
         switch (key) {
             case enum_1.RouteParamTypes.NEXT:
                 return next;
+            case enum_1.RouteParamTypes.CTX:
+                return ctx;
             case enum_1.RouteParamTypes.REQUEST:
                 return ctx.req;
             case enum_1.RouteParamTypes.RESPONSE:
