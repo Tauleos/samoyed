@@ -10,6 +10,8 @@ export default class RouteParamsFactory {
     switch (key) {
       case RouteParamTypes.NEXT:
         return next as any;
+      case RouteParamTypes.CTX:
+        return ctx as Context;
       case RouteParamTypes.REQUEST:
         return ctx.req as any;
       case RouteParamTypes.RESPONSE:
